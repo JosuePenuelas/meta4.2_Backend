@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.Ubicacion.hasMany(models.Activo, {foreignKey: "ubicacion"});
     }
   }
   Ubicacion.init({
     descripcion: { type: DataTypes.STRING, allowNull: false, unique: true },
-    imagen: { type: DataTypes.BLOB, allowNull: true }
+    imagen: { type: DataTypes.BLOB('long'), allowNull: true }
   }, {
     sequelize,
     modelName: 'Ubicacion',

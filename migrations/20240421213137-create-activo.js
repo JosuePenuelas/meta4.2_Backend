@@ -40,7 +40,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       imagen: {
-        type: Sequelize.BLOB,
+        type: Sequelize.BLOB('long'),
         allowNull: true
       },
       createdAt: {

@@ -1,10 +1,14 @@
-const Ubicacion = require('../models').Ubicacion;
+const { Ubicacion, Activo } = require('../models');
 const path = require('path');
 
 const ubicacionController = {
   async getAll(req, res) {
     try {
-      const ubicaciones = await Ubicacion.findAll();
+      const ubicaciones = await Ubicacion.findAll(
+        { 
+          include: [{model: Activo, attributes: ['id','descripcion']}]
+        }
+      );
       res.json(ubicaciones);
     } catch (error) {
       console.error('Error al obtener las ubicaciones:', error);
@@ -29,10 +33,10 @@ const ubicacionController = {
   async create(req, res) {
     const { descripcion } = req.body;
     const imagen = req.file ? req.file.path : null; // Ruta de la imagen subida
-    
+
     console.log('req.body:', req.body);
     console.log('req.file:', req.file);
-    
+
     try {
       const nuevaUbicacion = await Ubicacion.create({
         descripcion,

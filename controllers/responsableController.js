@@ -1,10 +1,15 @@
-const Responsable = require('../models').Responsable;
+const { Responsable, Activo } = require('../models');
 
 const responsableController = {
   // Obtener todos los responsables
   async getAll(req, res) {
     try {
-      const responsables = await Responsable.findAll();
+      const responsables = await Responsable.findAll(
+        { 
+          include: [{model: Activo, attributes: ['id','descripcion']}]
+        }
+      );
+      console.log(responsables);
       res.json(responsables);
     } catch (error) {
       console.error('Error al obtener los responsables:', error);

@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
+      models.Responsable.hasMany(models.Activo, {foreignKey: "responsable"});
     }
   }
   Responsable.init({
     numEmpleado: { type: DataTypes.INTEGER, allowNull: false, unique: true },
     nombre: { type: DataTypes.STRING, allowNull: false },
-    imagen: { type: DataTypes.BLOB, allowNull: true }
+    imagen: { type: DataTypes.BLOB('long'), allowNull: true }
   }, {
     sequelize,
     modelName: 'Responsable',

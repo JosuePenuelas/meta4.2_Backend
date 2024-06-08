@@ -15,7 +15,7 @@ module.exports = {
         unique: true
       },
       imagen: {
-        type: Sequelize.BLOB,
+        type: Sequelize.BLOB('long'),
         allowNull: true
       },
       createdAt: {

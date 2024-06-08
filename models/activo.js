@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     descripcion: { type: DataTypes.STRING, allowNull: false },
     ubicacion: DataTypes.INTEGER,
     responsable: DataTypes.INTEGER,
-    imagen: { type: DataTypes.BLOB, allowNull: true }
+    imagen: { type: DataTypes.BLOB('long'), allowNull: true }
   }, {
     sequelize,
     modelName: 'Activo',

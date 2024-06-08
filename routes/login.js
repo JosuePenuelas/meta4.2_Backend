@@ -16,11 +16,12 @@ router.get('/google/callback', passport.authenticate('auth-google', { session: f
   }
   const token = req.user.token;
   const nombreUsuario = req.user.nombreUsuario;
+  const correo = req.user.correo;
 
-  console.log('Usuario autenticado:', { token, nombreUsuario }); // Log del usuario autenticado
+  console.log('Usuario autenticado:', { token, nombreUsuario, correo }); // Log del usuario autenticado
 
   // Redirigir al frontend con el token y el nombre de usuario
-  res.redirect(`http://localhost:3000?token=${token}&name=${encodeURIComponent(nombreUsuario)}`);
+  res.redirect(`http://localhost:3000/activos?token=${token}&name=${encodeURIComponent(nombreUsuario)}&correo=${encodeURIComponent(correo)}`);
 });
 
 module.exports = router;

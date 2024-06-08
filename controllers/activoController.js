@@ -1,10 +1,27 @@
-const { Activo, Ubicacion, Responsable } = require('../models');
+const { Activo, Ubicacion, Responsable, Tag } = require('../models');
 
 const activoController = {
   // Obtener todos los activos
   async getAll(req, res) {
     try {
-      const activos = await Activo.findAll();
+      const activos = await Activo.findAll({
+        include: [
+          {
+            model: Tag,
+            attributes: ['descripcion'], // Solo incluir la descripción de los tags
+            through: { attributes: [] } // No incluir atributos de la tabla intermedia
+          },
+          {
+            model: Ubicacion,
+            attributes: ['descripcion'], // Incluye otros campos que consideres necesarios
+          },
+          {
+            model: Responsable,
+            attributes: ['nombre'] // Incluye otros campos que consideres necesarios
+          }
+        ]
+      });
+      console.log(activos);
       res.json(activos);
     } catch (error) {
       console.error('Error al obtener los activos:', error);
